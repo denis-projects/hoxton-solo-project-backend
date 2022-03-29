@@ -4,6 +4,8 @@ import dotenv from "dotenv"
 import helmet from "helmet";
 import morgan from "morgan";
 
+
+
 const app = express();
 
 // making a secure connection 
@@ -14,13 +16,21 @@ mongoose.connect(process.env.MONGO_URL, () => {
 });
 
 
+
 // set the env to use the dependencies we installed
 
-app.use(express())
+app.use(express.json())
 app.use(helmet())
 app.use(morgan("common"))
+const PORT = 4000
+
+// creating homepage Endpoint
+
+app.use("/api/users", (req, res) => {
+    res.send("users")
+})
 
 
-app.listen(6666, () => {
-    console.log(`Server is running`);
+app.listen(PORT, () => {
+    console.log(`Server up: http://localhost:${PORT}`)
 })
