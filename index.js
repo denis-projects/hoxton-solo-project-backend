@@ -7,7 +7,7 @@ import morgan from "morgan";
 const app = express();
 dotenv.config()
 
-mongoose.connect('mongodb://localhost:27017/myapp');
+mongoose.connect(process.env.MONGO_URL);
 
 app.listen(6666, () => {
     console.log(`Server is running`);
