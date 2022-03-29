@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv"
 import helmet from "helmet";
 import morgan from "morgan";
+import userRouter from "./routes/users.js"
+import authRouter from "./routes/auth.js"
 
 
 
@@ -26,9 +28,10 @@ const PORT = 4000
 
 // creating homepage Endpoint
 
-app.use("/api/users", (req, res) => {
-    res.send("users")
-})
+app.use("/api/users", userRouter)
+
+
+app.use("/api/auth", authRouter)
 
 
 app.listen(PORT, () => {
