@@ -5,7 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
-import Messages from "./models/Messagesdb.js"
+import messageRouter from "./routes/messages.js"
 
 
 
@@ -33,8 +33,17 @@ app.use("/api/users", userRouter)
 
 app.use("/api/auth", authRouter)
 
+app.use("/api/messages", messageRouter)
+
+
+
 
 // testing messages Endpoint
+
+// app.get("/messages", (req, res) =>
+//     res.status(200).send('this is messages endpoint')
+// )
+
 
 
 
