@@ -18,7 +18,8 @@
     "helmet": "^5.0.2",
     "mongoose": "^6.2.9",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "pusher": "^5.0.1"
   },
   "type": "module"
 }
