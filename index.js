@@ -5,6 +5,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
+import Messages from "./models/Messagesdb.js"
 
 
 
@@ -30,8 +31,11 @@ const PORT = 4000
 
 app.use("/api/users", userRouter)
 
-
 app.use("/api/auth", authRouter)
+
+
+// testing messages Endpoint
+
 
 
 app.listen(PORT, () => {

@@ -1,6 +1,6 @@
 import express from "express"
 const router = express.Router()
-import UserSchema from "../models/User.js"
+import User from "../models/User.js"
 
 router.get("/", (req, res) => {
     res.send("ok")
