@@ -3,6 +3,10 @@ import User from "../models/User.js"
 
 const router = express.Router()
 
+router.get("/register", (req, res) => {
+    res.send("this is regiister")
+})
+
 
 // router.post("/register", async (req, res) => {
 //     // @ts-ignore
