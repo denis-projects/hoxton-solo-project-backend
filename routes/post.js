@@ -9,7 +9,6 @@ router.get("/", (req, res) => {
 
 
 // create a post
-
 router.post("/", async (req, res) => {
     const newPost = new Post(req.body)
     try {
@@ -56,7 +55,22 @@ router.delete("/:id", async (req, res) => {
 
 })
 
-// like a post
+// like a post or dislike a post
+
+router.put("/:id/like", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id)
+        if (!post.like.includes(req.body.userId)) {
+            await post.updateOne({ $push: { likes: req.body.userId } })
+            res.status(200).send("the post is liked")
+        } else {
+            await post.updateOne({ $pull: { likes: req.body.userId } })
+            res.status(200).send("the post is disliked")
+        }
+    } catch (error) {
+        res.status(500).send(error)
+    }
+})
 
 // get a post
 
