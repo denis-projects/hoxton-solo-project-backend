@@ -29,9 +29,9 @@ router.post('/register', async (req, res) => {
 
         // save new user we created 
         const user = await newUser.save()
-        res.status(200).send(user)
+        res.status(201).send(user)
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
     }
 
 })
@@ -50,14 +50,11 @@ router.post("/login", async (req, res) => {
         const validPass = await bcrypt.compare(req.body.password, user.password)
         if (!validPass) res.status(400).send("Wrong password")
 
-
         // if the user enter the right credentiala
         res.status(200).send(user)
 
-
-
     } catch (err) {
-        console.log(err);
+        res.status(500).send(err)
     }
 
 })
@@ -66,5 +63,3 @@ router.post("/login", async (req, res) => {
 
 
 export default router
-
-
