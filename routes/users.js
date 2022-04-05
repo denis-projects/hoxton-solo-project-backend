@@ -64,12 +64,18 @@ router.get("/:id", async (req, res) => {
 
 
 router.put("/:id/follow", async (req, res) => {
+
+    // check if the id is the the same
     if (req.body.userId !== req.params.id) {
         try {
+            // find user by id
             const user = await User.findById(req.params.id)
+            // find current user by id
             const currentUser = await User.findById(req.params.id)
             if (!user.followers.includes(req.body.userId)) {
+                // if it is different we add to followers array
                 await user.updateOne({ $push: { followers: req.body.userId } })
+                // if it is different we push to followings array
                 await currentUser.updateOne({ $push: { followings: req.body.userId } })
 
                 res.status(200).send("You follow this user")
