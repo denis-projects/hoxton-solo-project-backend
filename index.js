@@ -7,6 +7,7 @@ import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
 import messageRouter from "./routes/messages.js"
 import Pusher from "pusher";
+import postRouter from "./routes/post.js";
 
 
 
@@ -69,6 +70,8 @@ app.use("/api/users", userRouter)
 app.use("/api/auth", authRouter)
 
 app.use("/api/messages", messageRouter)
+
+app.use("/api/posts", postRouter)
 
 
 
