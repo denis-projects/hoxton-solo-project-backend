@@ -10,7 +10,7 @@ router.get("/register", (req, res) => {
 
 
 
-// testing 
+// creating a new user
 
 router.post('/register', async (req, res) => {
 
