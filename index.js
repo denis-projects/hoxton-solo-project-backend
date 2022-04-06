@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import helmet from "helmet";
 import morgan from "morgan";
 import Pusher from "pusher";
+import Cors from "cors"
 
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
@@ -60,6 +61,7 @@ db.once("open", () => {
 // set the env to use the dependencies we installed
 
 app.use(express.json())
+app.use(Cors())
 app.use(helmet())
 app.use(morgan("common"))
 const PORT = 4000
