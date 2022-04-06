@@ -1,5 +1,6 @@
 import express from "express"
 import Post from "../models/Post.js"
+import User from "../models/User.js"
 
 const router = express.Router()
 
@@ -72,9 +73,30 @@ router.put("/:id/like", async (req, res) => {
     }
 })
 
-// get a post
+router.get("/:id", async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        res.status(200).send(post);
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
 
-// get timeline posts
+//get timeline posts
 
+router.get("/timeline/all", async (req, res) => {
+    try {
+        const currentUser = await User.findById(req.body.userId);
+        const userPosts = await Post.find({ userId: currentUser._id });
+        const friendPosts = await Promise.all(
+            currentUser.followings.map((friendId) => {
+                return Post.find({ userId: friendId });
+            })
+        );
+        res.send(userPosts.concat(...friendPosts))
+    } catch (err) {
+        res.status(500).send(err);
+    }
+});
 
 export default router
