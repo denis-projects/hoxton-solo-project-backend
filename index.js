@@ -3,10 +3,11 @@ import mongoose from "mongoose";
 import dotenv from "dotenv"
 import helmet from "helmet";
 import morgan from "morgan";
+import Pusher from "pusher";
+
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
 import messageRouter from "./routes/messages.js"
-import Pusher from "pusher";
 import postRouter from "./routes/post.js";
 
 
