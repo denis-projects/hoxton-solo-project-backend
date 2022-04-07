@@ -1,29 +1,31 @@
-// import express from "express"
-// import Messages from "../models/Messages.js"
+import express from "express"
+import Message from "../models/Messages.js"
 
-// const router = express.Router()
+const router = express.Router()
 
-// router.get("/sync", (req, res) => {
-//     Messages.find((err, data) => {
-//         if (err) {
-//             res.status(500).send(err)
-//         } else {
-//             res.status(200).send(data)
-//         }
-//     })
-// })
+// add 
 
-// router.post("/new", (req, res) => {
-//     const me = req.body;
+router.post("/", async (req, res) => {
+    const newMessage = new Message(req.body)
+    try {
+        const savedMessage = await newMessage.save()
+        res.status(200).json(savedMessage)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
-//     Messages.create(messagesdb, (err, data) => {
-//         if (err) {
-//             res.status(500).send(err)
-//         } else {
-//             res.status(201).send(data)
-//         }
-//     })
-// })
+// get
 
+router.get("/:conversationId", async (req, res) => {
+    try {
+        const messages = await Message.find({
+            conversationId: req.params.conversationId
+        })
+        res.status(200).json(messages)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+})
 
-// export default router
+export default router
