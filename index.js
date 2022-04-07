@@ -8,9 +8,10 @@ import Cors from "cors"
 
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
-// import messageRouter from "./routes/messages.js"
-import postRouter from "./routes/post.js";
-
+import postRouter from "./routes/posts.js"
+import messageRouter from "./routes/messages.js"
+import commentRoute from "./routes/comments.js"
+import conversationRoute from "./routes/conversations.js"
 
 
 const app = express();
@@ -64,18 +65,16 @@ app.use(express.json())
 app.use(Cors())
 app.use(helmet())
 app.use(morgan("common"))
-const PORT = 4000
+
 
 // creating homepage Endpoint
 
 app.use("/api/users", userRouter)
-
 app.use("/api/auth", authRouter)
-
-// app.use("/api/messages", messageRouter)
-
+app.use("/api/messages", messageRouter)
 app.use("/api/posts", postRouter)
-
+app.use("/api/conversations", conversationRoute)
+app.use("/api/comments", commentRoute)
 
 
 
@@ -85,9 +84,8 @@ app.use("/api/posts", postRouter)
 //     res.status(200).send('this is messages endpoint')
 // )
 
+const port = process.env.PORT || 4000
 
-
-
-app.listen(PORT, () => {
-    console.log(`Server up: http://localhost:${PORT}`)
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port} ...`)
 })

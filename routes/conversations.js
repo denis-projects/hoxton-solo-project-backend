@@ -1,6 +1,6 @@
 import express from "express"
 
-import Conversation from "../models/Conversation"
+import Conversation from "../models/Conversation.js"
 const router = express.Router()
 
 

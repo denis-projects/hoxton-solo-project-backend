@@ -1,6 +1,6 @@
 import express from "express"
 
-import Comment from "../models/Comment"
+import Comment from "../models/Comment.js"
 const router = express.Router()
 
 // new comment
