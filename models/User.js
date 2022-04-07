@@ -52,11 +52,11 @@ const User = new mongoose.Schema({
         max: 30
     },
     relationship: {
-        type: Number,
-        enum: [1, 2, 3]
+        type: String,
+        enum: ["Single", "Engaged", "Married"]
     }
 },
     { timestamps: true }
 );
 
-export default mongoose.model("user", User)
+export default mongoose.model("User", User)

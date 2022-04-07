@@ -3,25 +3,25 @@ import mongoose from "mongoose";
 import dotenv from "dotenv"
 import helmet from "helmet";
 import morgan from "morgan";
-import Pusher from "pusher";
+// import Pusher from "pusher";
 import Cors from "cors"
 
 import userRouter from "./routes/users.js"
 import authRouter from "./routes/auth.js"
-import messageRouter from "./routes/messages.js"
+// import messageRouter from "./routes/messages.js"
 import postRouter from "./routes/post.js";
 
 
 
 const app = express();
 
-const pusher = new Pusher({
-    appId: "1371536",
-    key: "1fc284867e78ec93a20a",
-    secret: "1750fcaa8ffe6c0e0145",
-    cluster: "eu",
-    useTLS: true
-});
+// const pusher = new Pusher({
+//     appId: "1371536",
+//     key: "1fc284867e78ec93a20a",
+//     secret: "1750fcaa8ffe6c0e0145",
+//     cluster: "eu",
+//     useTLS: true
+// });
 
 // making a secure connection 
 dotenv.config()
@@ -32,29 +32,29 @@ mongoose.connect(process.env.MONGO_URL, () => {
 
 //whatching real-time changes
 
-const db = mongoose.connection
+// const db = mongoose.connection
 
-db.once("open", () => {
-    console.log("DB connected");
+// db.once("open", () => {
+//     console.log("DB connected");
 
-    const msgCollection = db.collection
-        ("messages");
-    const changeStream = msgCollection.watch()
+//     const msgCollection = db.collection
+//         ("messages");
+//     const changeStream = msgCollection.watch()
 
-    changeStream.on("change", (change) => {
-        console.log("changed", change);
+//     changeStream.on("change", (change) => {
+//         console.log("changed", change);
 
-        if (change.operationType === "insert") {
-            const messageDetails = change.fullDocument;
-            pusher.trigger("messages", "inserted", {
-                name: messageDetails.username,
-                message: messageDetails.message
-            })
-        } else {
-            console.log("error on pusher");
-        }
-    })
-})
+//         if (change.operationType === "insert") {
+//             const messageDetails = change.fullDocument;
+//             pusher.trigger("messages", "inserted", {
+//                 name: messageDetails.username,
+//                 message: messageDetails.message
+//             })
+//         } else {
+//             console.log("error on pusher");
+//         }
+//     })
+// })
 
 
 
@@ -72,7 +72,7 @@ app.use("/api/users", userRouter)
 
 app.use("/api/auth", authRouter)
 
-app.use("/api/messages", messageRouter)
+// app.use("/api/messages", messageRouter)
 
 app.use("/api/posts", postRouter)
 
